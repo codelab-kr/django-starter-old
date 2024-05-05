@@ -1,4 +1,0 @@
-django
-pre-commit
-black
-Pillow
