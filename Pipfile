@@ -8,6 +8,7 @@ django = "*"
 pre-commit = "*"
 black = "*"
 pillow = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

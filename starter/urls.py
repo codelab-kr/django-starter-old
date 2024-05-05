@@ -25,12 +25,14 @@ from . import views
 urlpatterns = [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
+    path("playground/", include("playground.urls")),
     path("admin/", admin.site.urls),
     path("", views.homepage),
     path("about/", views.about),
     path("posts/", include("posts.urls")),
     path("users/", include("users.urls")),
     path("todos/", include("todos.urls")),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
