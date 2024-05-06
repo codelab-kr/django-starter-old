@@ -29,3 +29,7 @@ def post_new(request):
     else:
         form = forms.CreatePost()
     return render(request, "posts/post_new.html", {"form": form})
+
+
+def post_test(request):
+    return render(request, "posts/index.html")

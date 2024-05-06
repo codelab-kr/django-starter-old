@@ -9,8 +9,8 @@ export PIPENV_VERBOSITY=-1
 
 # 1. Set up the project
 ```shell
-git clone https://github.com/codelab-kr/django_starter.git
-cd django_starter
+git clone https://github.com/codelab-kr/core.git
+cd core
 pipenv install
 pipenv shell
 

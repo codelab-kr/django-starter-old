@@ -2,7 +2,7 @@
   "watch": {
     "build": {
       "patterns": [
-        "core"
+        "posts"
       ],
       "extensions": "html",
       "quiet": false
