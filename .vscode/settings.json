@@ -1,6 +1,6 @@
 {
   "emmet.includeLanguages": {
-      "django-html": "html"
+    "django-html": "html"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -10,5 +10,9 @@
   },
   "[django-html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
   }
 }

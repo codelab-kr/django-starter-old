@@ -25,8 +25,9 @@ from . import views
 urlpatterns = [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
-    path("admin/", admin.site.urls),
     path("", views.homepage),
+    path("core/", include("core.urls")),
+    path("admin/", admin.site.urls),
     path("about/", views.about),
     path("posts/", include("posts.urls")),
     path("users/", include("users.urls")),

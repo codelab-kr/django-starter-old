@@ -13,6 +13,11 @@ git clone https://github.com/codelab-kr/django_starter.git
 cd django_starter
 pipenv install
 pipenv shell
+
+# install dependencies
+yarn set version berry
+yard set version stable
+yarn install
 ```
 
 ### ( Optinal ) If the database is not created
