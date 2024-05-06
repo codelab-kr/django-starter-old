@@ -8,5 +8,6 @@ urlpatterns = [
     path("", views.posts_list, name="list"),
     path("new-post/", views.post_new, name="new-post"),
     path("test", views.post_test, name="test"),
+    path("home", views.post_home, name="home"),
     path("<slug:slug>", views.post_page, name="page"),
 ]

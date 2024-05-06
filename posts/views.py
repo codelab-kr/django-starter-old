@@ -4,12 +4,14 @@ from django.shortcuts import redirect, render
 from . import forms
 from .models import Post
 
-# Create your views here.
+
+def post_home(request):
+    return render(request, "posts/home.html")
 
 
 def posts_list(request):
     posts = Post.objects.all().order_by("-date")
-    return render(request, "posts/posts_list.html", {"posts": posts})
+    return render(request, "posts/post_list.html", {"posts": posts})
 
 
 def post_page(request, slug):
@@ -32,4 +34,4 @@ def post_new(request):
 
 
 def post_test(request):
-    return render(request, "posts/index.html")
+    return render(request, "posts/post_test.html")
