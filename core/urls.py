@@ -31,6 +31,7 @@ urlpatterns = [
     path("posts/", include("posts.urls")),
     path("users/", include("users.urls")),
     path("todos/", include("todos.urls")),
+    path("acts/", include("acts.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
 

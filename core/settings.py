@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "posts",
     "users",
     "todos",
+    "acts",
     "debug_toolbar",
 ]
 
