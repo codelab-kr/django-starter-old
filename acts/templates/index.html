@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Awesome</title>
+        <link rel="shortcut icon"
+              type="image/png"
+              href="https://img.icons8.com/small/64/000000/fire-heart.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+              rel="stylesheet" />
+        <link rel="stylesheet" href="{% static 'css/main.min.css' %}" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style type="text/tailwindcss">
+      [x-cloak] {
+        display: none !important;
+      }
+      :root {
+        --primary: rgb(88, 40, 244);
+        --primary-hover: rgb(69, 29, 200);
+        --black: #1f2937;
+        --font1: "Lobster", sans-serif;
+      }
+      h1 {
+        font-size: 4rem;
+        line-height: 1.2;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-family: Lobster;
+      }
+      .button,
+      button,
+      [type="submit"],
+      [type="button"] {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        text-align: center;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        padding: 0 1rem;
+        min-height: 3.3rem;
+        font-weight: 600;
+        box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+        transition-property: transform;
+        transition-duration: 0.2s;
+        color: white;
+        background-color: var(--primary);
+        width: fit-content;
+      }
+      .button:hover,
+      button:hover,
+      [type="submit"]:hover,
+      [type="button"]:hover {
+        background-color: var(--primary-hover);
+      }
+      .button:active,
+      button:active,
+      [type="submit"]:active,
+      [type="button"]:active {
+        transform: scale(0.95);
+      }
+      .navitems > li > a {
+        @apply flex items-center gap-2 h-12 px-4 hover:bg-gray-700 rounded-lg;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        border-radius: 1rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        background-color: white;
+        padding-bottom: 1rem;
+        width: 100%;
+      }
+        </style>
+    </head>
+    <body class="bg-gray-100">
+        <header class="flex items-center justify-between px-8 bg-gray-800 h-20 text-white sticky top-0 z-50">
+            <log>
+            <a href="" class="flex items-center gap-1">
+                <img src="https://img.icons8.com/small/64/ffffff/fire-heart.png"
+                     alt="fire-heart"
+                     class="h-8 -mt-1" />
+                <span>Awesome</span>
+            </a>
+            </log>
+            <nav>
+                <ul class="flex items-center navitems">
+                    <li>
+                        <a href="">Home</a>
+                    </li>
+                    <li>
+                        <a href="">Create Post</a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img class="h-8 rounded-full object-cover bg-slate-300"
+                                 src="https://img.icons8.com/doodle/96/bart-simpson.png"
+                                 alt="bart-simpson" />
+                            Bart
+                            <img class="w-4"
+                                 src="https://img.icons8.com/ios/50/777777/expand-arrow--v1.png"
+                                 alt="expand-arrow--v1" />
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <hero class="grid bg-gray-700 text-white text-center bg-[url('https://live.staticflickr.com/65535/49909538937_3255dcf9e7_b.jpg')] bg-cover bg-no-repeat relative">
+        <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+        <div class="col-start-1 row-start-1 py-24 px-10">
+            <h1>Awesome Photos & Captions</h1>
+            <p class="text-lg font-bold mb-5">Share your awesome photos and captions with the world</p>
+            <a class="button" href="">Get Started</a>
+        </div>
+        </hero>
+        <content class="grid grid-cols-3 max-w-7xl mx-auto mt-6">
+            <main class="col-span-2 mx-[10%]">
+                <article class="card">
+                    <div class="flex items-center justify-between px-4 h-14">
+                        <h3 class="text-lg font-bold w-[50%] truncate">Little Jedi</h3>
+                        <div class="text-sm text-gray-500">
+                            flicker @<a href="" target="_blank" class="hover:underline">John Doe</a>
+                        </div>
+                    </div>
+                    <figure>
+                        <a href="">
+                            <img class="w-full h-full object-cover"
+                                 src="https://cdn.pixabay.com/photo/2023/08/18/15/02/cat-8198720_1280.jpg"
+                                 alt="" />
+                        </a>
+                    </figure>
+                    <div class="p-4 pb-2">
+                        <a href="">
+                            <img src="" alt="" />
+                            <span>dd</span></a>
+                    </div>
+                </article>
+            </main>
+            <aside class="col-span-1 mx-[20%] bg-red-200">
+                Sidebar
+            </aside>
+        </content>
+        <script src="{% static 'js/htmx.min.js' %}"></script>
+    </body>
+</html>

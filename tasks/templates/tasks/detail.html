@@ -1,0 +1,7 @@
+<h1>Task</h1>
+{% if task %}
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.description }}</p>
+{% else %}
+    <p>No task available</p>
+{% endif %}

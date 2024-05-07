@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "users",
     "todos",
     "acts",
+    "tasks",
     "debug_toolbar",
+    "livereload",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "livereload.middleware.LiveReloadScript",
 ]
 
 INTERNAL_IPS = [

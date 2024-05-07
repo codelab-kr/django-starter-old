@@ -9,6 +9,7 @@ pre-commit = "*"
 black = "*"
 pillow = "*"
 django-debug-toolbar = "*"
+django-livereload-server = "*"
 
 [dev-packages]
 

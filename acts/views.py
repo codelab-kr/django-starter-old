@@ -21,3 +21,11 @@ def act_create(request):
             return redirect("acts:home")
     form = forms.CreateAct()
     return render(request, "acts/act_create.html", {"form": form})
+
+
+def act_test(request):
+    return render(request, "test.html")
+
+
+def act_index(request):
+    return render(request, "index.html")
