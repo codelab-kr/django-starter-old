@@ -1,53 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tasks</title>
-    </head>
-    <body class="bg-gray-200">
-        <nav class="p-6 bg-blue-500 text-white text-center">
-            <a href="/tasks/" class="text-3xl">Tailwind Task</a>
-        </nav>
-        <div class="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
-            <form hx-post="/tasks/add/"
-                  hx-target="#tasks"
-                  hx-swap="afterend"
-                  class="flex items-center space-x-4">
-                <input type="text"
-                       name="title"
-                       placeholder="New task"
-                       class="title flex-grow py-2 px-4 border rounded-lg" />
-                <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded-lg">Add</button>
-            </form>
-            {% comment %}
-      <div class="flex py-3 rounded-xl bg-gray-100 my-2">
-        <div class="w-4/5">
-          <p class="px-6 text-xs font-medium text-gray-500 uppercase">Title</p>
-        </div>
-        <div class="hidden md:block w-1/5 px-6 text-right">
-          <p class="text-xs font-medium text-gray-500 uppercase">Actions</p>
-        </div>
-      </div>
-            {% endcomment %}
-            <article class="my-2">
-                <div class="divide-y divide-gray-200" id="tasks">
-                    {% for task in tasks %}
-                        {% include 'tasks/partials/task.html' %}
-                    {% endfor %}
-                </div>
-            </article>
-        </div>
-    </body>
-    <script src="https://cdn.tailwindcss.com"></script>
+{% extends 'layout.html' %}
+{% block title %}About{% endblock %}
+{% block
+    content %}
+    <nav class="p-6 bg-blue-500 text-white text-center">
+        <a href="/tasks/" class="text-3xl">Tailwind Task</a>
+    </nav>
+    <div class="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+        <form hx-post="/tasks/add/"
+              hx-target="#tasks"
+              hx-swap="afterend"
+              class="flex items-center space-x-4">
+            <input type="text"
+                   name="title"
+                   placeholder="New task"
+                   class="title flex-grow py-2 px-4 border rounded-lg" />
+            <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded-lg">Add</button>
+        </form>
+        {% comment %}
+  <div class="flex py-3 rounded-xl bg-gray-100 my-2">
+    <div class="w-4/5">
+      <p class="px-6 text-xs font-medium text-gray-500 uppercase">Title</p>
+    </div>
+    <div class="hidden md:block w-1/5 px-6 text-right">
+      <p class="text-xs font-medium text-gray-500 uppercase">Actions</p>
+    </div>
+  </div>
+        {% endcomment %}
+        <article class="my-2">
+            <div class="divide-y divide-gray-200" id="tasks">
+                {% for task in tasks %}
+                    {% include 'tasks/partials/task.html' %}
+                {% endfor
+                %}
+            </div>
+        </article>
+    </div>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script>
-    document.body.addEventListener("htmx:configRequest", (event) => {
-      event.detail.headers["X-CSRFToken"] = "{{ csrf_token }}";
-    });
+  document.body.addEventListener("htmx:configRequest", (event) => {
+    event.detail.headers["X-CSRFToken"] = "{{ csrf_token }}";
+  });
 
-    document.body.addEventListener("htmx:afterRequest", (event) => {
-      document.querySelector("input.title").value = "";
-    });
+  document.body.addEventListener("htmx:afterRequest", (event) => {
+    document.querySelector("input.title").value = "";
+  });
     </script>
-</html>
+{% endblock %}

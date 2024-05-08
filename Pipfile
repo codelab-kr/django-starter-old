@@ -10,6 +10,9 @@ black = "*"
 pillow = "*"
 django-debug-toolbar = "*"
 django-livereload-server = "*"
+django-environ = "*"
+django-admin-honeypot1 = "*"
+whitenoise = "*"
 
 [dev-packages]
 

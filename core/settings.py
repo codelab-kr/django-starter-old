@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from environ import Env
+
+env = Env()
+Env.read_env()
+ENVIRONMENT = env("ENVIRONMENT", default="development")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +26,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-@6kz*k^+vcqewv108szj1@=180m=rj2-x8fx5se+zat4-uqcn@"
+SECRET_KEY = env("SECRET_KEY")
+ENCRYPT_KEY = env("ENCRYPT_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if ENVIRONMENT == "development":
+    DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost:8000",
+    "localhost:9000",
+]
 
 # Application definition
 
@@ -37,8 +52,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "posts",
+    "admin_honeypot",
     "users",
+    "posts",
     "acts",
     "tasks",
     "debug_toolbar",
@@ -48,6 +64,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -57,9 +74,6 @@ MIDDLEWARE = [
     "livereload.middleware.LiveReloadScript",
 ]
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 ROOT_URLCONF = "core.urls"
 
@@ -130,13 +144,26 @@ USE_TZ = True
 STATIC_URL = "static/"
 MEDIA_URL = "media/"
 
-STATIC_ROOT = BASE_DIR / "assets"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATIC_ROOT = BASE_DIR / "assets"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_ROOT = BASE_DIR / "media"
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ACCOUNT_USERNAME_BLACKLIST = [
+    "admin",
+    "accounts",
+    "profile",
+    "category",
+    "post",
+    "inbox",
+    "boss",
+]
