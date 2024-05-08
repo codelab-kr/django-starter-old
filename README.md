@@ -28,6 +28,14 @@ python3 manage.py migrate
 python3 manage.py createsuperuser
 ```
 
+### ( Optinal ) for development environment
+```shell
+# start webpack server
+yarn watch
+# livereload for django templates
+python3 manage.py livereload
+```
+
 # 2. Run server
 ```shell
 python3 manage.py runserver

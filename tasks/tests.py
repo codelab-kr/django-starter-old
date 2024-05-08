@@ -14,13 +14,13 @@ class TaskModelTest(TestCase):
         self.assertEqual(str(task), "Test task")
 
 
-class IndexPageTest(TestCase):
+class IndexTest(TestCase):
     def setUp(self):
         self.task = Task.objects.create(title="Test task")
 
     def test_index_page_returns_correct_response(self):
         response = self.client.get("/tasks/")
-        self.assertTemplateUsed(response, "tasks/index.html")
+        self.assertTemplateUsed(response, "tasks/tasks.html")
         self.assertEqual(response.status_code, 200)
 
     def test_index_page_has_tasks(self):
@@ -28,76 +28,39 @@ class IndexPageTest(TestCase):
         self.assertContains(response, self.task.title)
 
 
-class DetailPageTest(TestCase):
-    def setUp(self):
-        self.task = Task.objects.create(
-            title="Test task", description="Test description"
-        )
-        self.task2 = Task.objects.create(
-            title="Another task", description="Another description"
-        )
-
-    def test_detail_page_returns_correct_response(self):
-        response = self.client.get(f"/tasks/{self.task.id}/")
-        self.assertTemplateUsed(response, "tasks/detail.html")
-        self.assertEqual(response.status_code, 200)
-
-    def test_detail_page_has_correct_content(self):
-        response = self.client.get(f"/tasks/{self.task.id}/")
-        self.assertContains(response, self.task.title)
-        self.assertContains(response, self.task.description)
-
-    def test_detail_page_does_not_have_incorrect_content(self):
-        response = self.client.get(f"/tasks/{self.task.id}/")
-        self.assertNotContains(response, self.task2.title)
-        self.assertNotContains(response, self.task2.description)
-
-
-class NewPageTest(TestCase):
+class AddTest(TestCase):
     def setUp(self):
         self.form = TaskForm
-
-    def test_new_page_returns_correct_response(self):
-        response = self.client.get("/tasks/new/")
-        self.assertTemplateUsed(response, "tasks/new.html")
-        self.assertEqual(response.status_code, 200)
 
     def test_form_is_valid(self):
         self.assertTrue(issubclass(self.form, TaskForm))
         self.assertTrue("title" in self.form().fields)
         self.assertTrue("description" in self.form().fields)
 
-        form = self.form(data={"title": "New task", "description": "New description"})
+        form = self.form(data={"title": "Add task", "description": "Add description"})
         self.assertTrue(form.is_valid())
 
-    def test_new_page_form_renders(self):
-        response = self.client.get("/tasks/new/")
-        self.assertContains(response, "<form")
-        self.assertContains(response, "csrfmiddlewaretoken")
-        self.assertContains(response, "label for")
-        self.assertIsInstance(response.context["form"], TaskForm)
+    def test_add_page_form_renders(self):
 
         # Test invalid form data
         response = self.client.post(
-            "/tasks/new/",
-            {"title": "", "description": "New description"},
+            "/tasks/add/",
+            {"title": "", "description": "Add description"},
         )
-        self.assertContains(response, '<ul class="errorlist">')
         self.assertContains(response, "This field is required.")
 
         # Test valid form data
         response = self.client.post(
-            "/tasks/new/",
-            {"title": "New task", "description": "New description"},
+            "/tasks/add/",
+            {"title": "Add task", "description": "Add description"},
         )
         self.assertEqual(Task.objects.count(), 1)
         task = Task.objects.first()
-        self.assertEqual(task.title, "New task")
-        self.assertEqual(task.description, "New description")
-        self.assertRedirects(response, "/tasks/")
+        self.assertEqual(task.title, "Add task")
+        self.assertEqual(task.description, "Add description")
 
 
-class EditPageTest(TestCase):
+class EditTest(TestCase):
     def setUp(self):
         self.form = TaskForm
         self.task = Task.objects.create(
@@ -109,7 +72,7 @@ class EditPageTest(TestCase):
 
     def test_edit_page_returns_correct_response(self):
         response = self.client.get(f"/tasks/{self.task.id}/edit/")
-        self.assertTemplateUsed(response, "tasks/edit.html")
+        self.assertTemplateUsed(response, "tasks/partials/edit.html")
         self.assertEqual(response.status_code, 200)
 
     def test_form_is_valid(self):
@@ -118,16 +81,16 @@ class EditPageTest(TestCase):
         self.assertTrue("description" in self.form().fields)
 
         form = self.form(
-            data={"title": "New task", "description": "New description"},
+            data={"title": "Add task", "description": "Add description"},
             instance=self.task,
         )
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEqual(self.task.title, "New task")
+        self.assertEqual(self.task.title, "Add task")
 
     def test_from_is_invalid(self):
         form = self.form(
-            data={"title": "", "description": "New description"},
+            data={"title": "", "description": "Add description"},
             instance=self.task,
         )
         self.assertFalse(form.is_valid())
@@ -148,13 +111,12 @@ class EditPageTest(TestCase):
         self.assertContains(response, "csrfmiddlewaretoken")
 
         # Test invalid form data
-        # response = self.client.post(
-        #     f"/tasks/{self.task.id}/edit/",
-        #     {"id": self.task.id, "title": "", "description": "New description"},
-        #     instance=self.task,
-        # )
-        # self.assertContains(response, '<ul class="errorlist">')
-        # self.assertContains(response, "This field is required.")
+        response = self.client.post(
+            f"/tasks/{self.task.id}/edit/",
+            {"id": self.task.id, "title": "", "description": "Add description"},
+            instance=self.task,
+        )
+        self.assertContains(response, "This field is required.")
 
         # Test valid form data
         response = self.client.post(
@@ -171,7 +133,6 @@ class EditPageTest(TestCase):
         task = Task.objects.first()
         self.assertEqual(task.title, "updated task")
         self.assertEqual(task.description, "updated description")
-        self.assertRedirects(response, f"/tasks/{self.task.id}/")
 
 
 class DeletePageTest(TestCase):
@@ -180,6 +141,5 @@ class DeletePageTest(TestCase):
 
     def test_delete_page_returns_correct_response(self):
         self.assertEqual(Task.objects.count(), 1)
-        response = self.client.get(f"/tasks/{self.task.id}/delete/")
+        self.client.delete(f"/tasks/{self.task.id}/delete/")
         self.assertEqual(Task.objects.count(), 0)
-        self.assertRedirects(response, "/tasks/")

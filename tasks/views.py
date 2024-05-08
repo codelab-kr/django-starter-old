@@ -1,4 +1,7 @@
-from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
 
 from .forms import TaskForm
 from .models import Task
@@ -6,38 +9,45 @@ from .models import Task
 
 def index(request):
     tasks = Task.objects.all()
-    return render(request, "tasks/index.html", {"tasks": tasks})
+    return render(request, "tasks/tasks.html", {"tasks": tasks})
 
 
-def detail(request, pk):
-    task = Task.objects.get(pk=pk)
-    return render(request, "tasks/detail.html", {"task": task})
-
-
-def new(request):
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("tasks:index")
+@require_http_methods(["POST"])
+def add(request):
+    form = TaskForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return render(
+            request, "tasks/partials/task.html", {"form": form, "task": form.instance}
+        )
     else:
-        form = TaskForm()
-    return render(request, "tasks/new.html", {"form": form})
+        messages.error(request, form.errors.as_text())
+        return render(request, "tasks/partials/task.html", {"form": form})
 
 
+@require_http_methods(["GET", "POST"])
 def edit(request, pk):
     task = Task.objects.get(pk=pk)
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect("tasks:detail", pk=pk)
+            return render(request, "tasks/partials/task.html", {"task": task})
     else:
         form = TaskForm(instance=task)
-    return render(request, "tasks/edit.html", {"task": task, "form": form})
+    return render(request, "tasks/partials/edit.html", {"task": task, "form": form})
 
 
+@require_http_methods(["PUT"])
+def update(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.is_done = True
+    task.save()
+    return render(request, "tasks/partials/task.html", {"task": task})
+
+
+@require_http_methods(["DELETE"])
 def delete(request, pk):
     task = Task.objects.get(pk=pk)
     task.delete()
-    return redirect("tasks:index")
+    return HttpResponse()

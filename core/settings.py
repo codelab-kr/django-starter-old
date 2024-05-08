@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "posts",
     "users",
-    "todos",
     "acts",
     "tasks",
     "debug_toolbar",
