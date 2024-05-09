@@ -2,16 +2,24 @@
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li {% if message.tags %}class="text-red-600 {{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li
+                    {%
+                    if
+                    message.tags
+                    %}class="text-red-600 {{ message.tags }}"
+                    {%
+                    endif
+                    %}
+                    >{{ message }}</li>
             {% endfor %}
         </ul>
         <script>
-  setTimeout(function() {
-      const messages = document.querySelector('.messages');
+    setTimeout(function () {
+      const messages = document.querySelector(".messages");
       if (messages) {
-          messages.style.display = 'none';
+        messages.style.display = "none";
       }
-  }, 2000);
+    }, 2000);
         </script>
     {% else %}
         <div class="w-4/5 py-3">
