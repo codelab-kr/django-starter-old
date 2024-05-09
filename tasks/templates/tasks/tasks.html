@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 {% block title %}About{% endblock %}
-{% block
-    content %}
+{% block content %}
     <nav class="p-6 bg-blue-500 text-white text-center">
         <a href="/tasks/" class="text-3xl">Tailwind Task</a>
     </nav>
@@ -30,8 +29,7 @@
             <div class="divide-y divide-gray-200" id="tasks">
                 {% for task in tasks %}
                     {% include 'tasks/partials/task.html' %}
-                {% endfor
-                %}
+                {% endfor %}
             </div>
         </article>
     </div>

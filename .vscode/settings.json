@@ -8,9 +8,9 @@
       "source.organizeImports.ruff": "explicit"
     }
   },
-  "[django-html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  // "[django-html]": {
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode"
+  // },
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
