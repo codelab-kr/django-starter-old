@@ -15,6 +15,11 @@ from pathlib import Path
 import dj_database_url
 from environ import Env
 
+APPEND_SLASH = False
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+
+
 env = Env()
 Env.read_env()
 ENVIRONMENT = env("ENVIRONMENT", default="development")
