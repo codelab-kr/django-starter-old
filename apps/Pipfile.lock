@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5342630da2d9a8ba7a82a2075a04f170b47a7128f773daf9bed1db4eab573d56"
+            "sha256": "31cfaad38ff89764b47a42716fc507b98162336f2f28e2fcec295a70582b3a4d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -55,20 +55,20 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:1d854b5880e185db546b4c759fcb664bf3326275064d2b44229cc217e8be9d7e",
-                "sha256:79b93f3370ea96ce838042bc2eac0c996aee204b01e7e6452eb77abcbe697d6a"
+                "sha256:1c1fb2884f85c0ec6b62e6e7ed5a2a6635e1188f3ab5d2b700f7db1cf8464484",
+                "sha256:65e4b9fb9ceefe19976e8822ac0cd68d28946d4697e538741d2bbdb5b45ae42f"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.34.101"
+            "version": "==1.34.102"
         },
         "botocore": {
             "hashes": [
-                "sha256:01f3802d25558dd7945d83884bf6885e2f84e1ff27f90b5f09614966fe18c18f",
-                "sha256:f145e8b4b8fc9968f5eb695bdc2fcc8e675df7fbc3c56102dc1f5471be6baf35"
+                "sha256:79ac7fc2729294395c70eff9c23510f00785ad2acd78d6130cb4379e9f27da86",
+                "sha256:e2f8a9f4bac6f7b568e6e981ac2a2500bc992329c85dde8546f0cae8605dd009"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==1.34.101"
+            "version": "==1.34.102"
         },
         "cfgv": {
             "hashes": [
@@ -176,6 +176,15 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.0.1"
+        },
+        "mangum": {
+            "hashes": [
+                "sha256:5b4e26375e12eed051687670466d17968f8b74beecaca432edd4eb4127f78509",
+                "sha256:f00be705605bc4793958df62e4d249abf58d254c39d90bb410d069570206f4a2"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==0.17.0"
         },
         "mypy-extensions": {
             "hashes": [

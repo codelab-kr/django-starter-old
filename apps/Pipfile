@@ -17,6 +17,7 @@ dj-database-url = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
 boto3 = "*"
+mangum = "*"
 
 [dev-packages]
 
