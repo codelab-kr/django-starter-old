@@ -55,7 +55,7 @@ jobs:
 
       - name: Django collectstatic
         working-directory: ./apps
-        run: python3 manage.py collectstatic
+        run: python3 manage.py collectstatic --noinput
         env:
           ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
