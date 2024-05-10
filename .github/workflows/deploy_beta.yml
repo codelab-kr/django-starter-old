@@ -19,12 +19,10 @@ jobs:
           node-version: 20
 
       - name: Install to minimize css, js
-        working-directory: ./dev
-        run: yarn set version berry && yarn set version stable && yarn install
+        run: npm ci
 
       - name: Minimize css, js
-        working-directory: ./dev
-        run: yarn minify
+        run: npm run minify
 
       - name: Setup Python
         uses: actions/setup-python@v2
