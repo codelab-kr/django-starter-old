@@ -1,0 +1,64 @@
+name: Deploy to AWS (CDK)
+
+on:
+  push:
+    branches:
+      - feature
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Install to minimize css, js
+        working-directory: ./dev
+        run: npm ci
+
+      - name: Minimize css, js
+        working-directory: ./dev
+        run: npm run minify
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Django dependencies
+        working-directory: ./apps
+        run: python3 -m pip install -t . -r requirements.txt
+
+      - name: Run Django tests
+        working-directory: ./apps
+        run: python3 manage.py test
+
+      - name: Run Django migrations
+        working-directory: ./apps
+        run: python3 manage.py migrate
+
+      - name: Django collectstatic
+        working-directory: ./apps
+        run: python3 manage.py collectstatic
+
+      - name: Zip Django dependencies & Codes
+        working-directory: ./apps
+        run: (zip ../infra/aws_lambda_artifact.zip -r .)
+
+      - name: Install AWS CDK
+        working-directory: ./infra
+        run: npm ci
+
+      - name: Deploy CDK
+        working-directory: ./infra
+        run: npx cdk deploy --require-approval never
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.BETA_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.BETA_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.BETA_AWS_REGION }}

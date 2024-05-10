@@ -10,38 +10,44 @@ export PIPENV_VERBOSITY=-1
 # 1. Set up the project
 ```shell
 git clone https://github.com/codelab-kr/django-starter.git
-cd django-starter
+
+
+# vene init
+cd django-starter/apps
 pipenv install
 pipenv shell
 
-# install dependencies
-yarn set version berry
-yard set version stable
-yarn install
-```
-
-### ( Optinal ) If the database is not created
-```shell
+# (Optinal) If the database is not created
 # create database
 python3 manage.py migrate
+
 # create superuser
 python3 manage.py createsuperuser
 ```
 
-### ( Optinal ) for development environment
+
+### (Optinal) for development environment
 ```shell
-# start webpack server
-yarn watch
+# install dependencies
+yarn set version berry
+yard set version stable
+yarn install
+# watch css
+yarn tailwind
+
+# New Terminal
 # livereload for django templates
 python3 manage.py livereload
 ```
 
+
 # 2. Run server
 ```shell
+# New Terminal
 python3 manage.py runserver
 ```
 
 
 # 3. Access to browser and check
 - Server http://localhost:8000
-- admin page http://localhost:8000/admin
+- admin page http://localhost:8000/<hidden>

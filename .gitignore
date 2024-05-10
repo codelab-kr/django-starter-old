@@ -178,7 +178,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -327,3 +326,12 @@ media/
 __pycache__/
 db.sqlite3
 .DS_Store
+
+
+!jest.config.js
+*.d.ts
+node_modules
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
