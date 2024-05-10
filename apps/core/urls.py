@@ -30,7 +30,7 @@ urlpatterns = [
     path("", views.homepage),
     path("boss/", admin.site.urls),
     path("about/", views.about),
-    path("posts/", include("posts.urls")),
+    path("posts", include("posts.urls")),
     path("users/", include("users.urls")),
     path("acts/", include("acts.urls")),
     path("tasks/", include("tasks.urls")),
