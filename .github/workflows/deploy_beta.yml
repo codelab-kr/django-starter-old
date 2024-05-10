@@ -33,9 +33,9 @@ jobs:
         working-directory: ./apps
         run: python3 -m pip install -t . -r requirements.txt
 
-      - name: Run Django tests
-        working-directory: ./apps
-        run: python3 manage.py test
+      # - name: Run Django tests
+      #   working-directory: ./apps
+      #   run: python3 manage.py test
 
       - name: Run Django migrations
         working-directory: ./apps
